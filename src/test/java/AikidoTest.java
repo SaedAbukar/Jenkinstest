@@ -28,6 +28,7 @@ class AikidoTest {
         aikido.addTrainingSession(trainingSession);
         aikido.addTrainingSession(trainingSession1);
         assertEquals(2, aikido.getTrainingSessions().size());
+        assertEquals(aikido.getTotalTrainingSessions(), aikido.getTotalTrainingSessions());
     }
 
     @Test
@@ -49,10 +50,6 @@ class AikidoTest {
         aikido.addTrainingSession(trainingSession);
         aikido.addTrainingSession(trainingSession1);
         assertEquals(false, aikido.getEligibleForGraduation());
-    }
-
-    @Test
-    void setEligibleForGraduation() {
     }
 
     @Test

@@ -34,11 +34,6 @@ public class Aikido {
     public Boolean getEligibleForGraduation() {
         return eligibleForGraduation;
     }
-
-    public void setEligibleForGraduation(Boolean eligibleForGraduation) {
-        this.eligibleForGraduation = eligibleForGraduation;
-    }
-
     public void checkEligibility() {
         LocalDate startDate = trainingSessions.get(0).getDate();
         LocalDate endDate = trainingSessions.get(trainingSessions.size() - 1).getDate();
