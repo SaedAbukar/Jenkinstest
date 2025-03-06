@@ -1,10 +1,13 @@
 pipeline {
     agent any
-
-    tools {
-            maven 'Maven'
+     environment {
+            // Define Docker Hub credentials ID
+            DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
+            // Define Docker Hub repository name
+            DOCKERHUB_REPO = 'saedabukar/inclasstest'
+            // Define Docker image tag
+            DOCKER_IMAGE_TAG = 'latest_v1'
         }
-
     stages {
         stage('Checkout') {
             steps {
@@ -13,17 +16,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
         }
         stage('Code Coverage') {
             steps {
-                bat 'mvn jacoco:report'
+                sh 'mvn jacoco:report'
             }
         }
         stage('Publish Test Results') {
@@ -36,5 +39,24 @@ pipeline {
                 jacoco()
             }
         }
+
+         stage('Build Docker Image') {
+                    steps {
+                        // Build Docker image
+                        script {
+                            docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                        }
+                    }
+                }
+                stage('Push Docker Image to Docker Hub') {
+                    steps {
+                        // Push Docker image to Docker Hub
+                        script {
+                            docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                                docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                            }
+                        }
+                    }
+                }
     }
 }
