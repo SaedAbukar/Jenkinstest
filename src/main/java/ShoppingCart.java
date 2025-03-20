@@ -2,9 +2,7 @@ import java.util.*;
 
 public class ShoppingCart {
     private int totalCost;
-    private int itemCost;
     private HashMap<String, Double> items;
-    Locale locale;
 
     public ShoppingCart() {
         items = new HashMap<>();
