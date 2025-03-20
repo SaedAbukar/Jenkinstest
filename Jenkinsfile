@@ -43,6 +43,18 @@ pipeline {
                 jacoco()
             }
         }
+        stages {
+            stage('Set Docker Host') {
+                steps {
+                    script {
+                        if (isUnix()) {
+                            env.DOCKER_HOST = 'unix:///var/run/docker.sock'
+                        } else {
+                            env.DOCKER_HOST = 'npipe:////./pipe/docker_engine'
+                        }
+                    }
+                }
+            }
 
          stage('Build Docker Image') {
                     steps {
