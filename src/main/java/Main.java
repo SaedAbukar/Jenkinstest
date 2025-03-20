@@ -48,7 +48,7 @@ public class Main {
          String name = scanner.next();
          // Enter the price for item:
          System.out.println(messages.getString("price"));
-         double price = price = scanner.nextInt();
+         double price = scanner.nextInt();
          // Enter the quantity for item:
          System.out.println(messages.getString("quantity"));
          double quantity = scanner.nextInt();
