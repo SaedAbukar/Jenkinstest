@@ -7,4 +7,4 @@ COPY . /app/
 
 RUN mvn package
 
-ENTRYPOINT ["java", "-jar", "target/Aikido.jar"]
+ENTRYPOINT ["java", "-jar", "target/ShoppingCart.jar"]
